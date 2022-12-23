@@ -37,18 +37,12 @@ def recursive_binary_search(array: list, value: any) -> int:
 
     return recursive_binary_search(array[midpoint:], value)
 
-def recursive_binary_search2(
-    array: list,
-    value: any,
-    start: int,
-    end: int) -> int:
+def recursive_binary_search2(array: list, value: any, start: int, end: int) -> int:
     """Binary Search Algorithm - Recursive approach 2
 
     This approach focuses on being able to return the index of the element found
     """
-
-    print(f"start={start} / end={end}")
-    if start > end:
+    if start > end or (start == end and array[start] != value):
         return -1
 
     midpoint = math.floor((start + end)/2)
@@ -57,24 +51,25 @@ def recursive_binary_search2(
         return midpoint
 
     if array[midpoint] > value:
-        return recursive_binary_search2(array, value, 0, midpoint - 1)
+        return recursive_binary_search2(array, value, start, midpoint - 1)
 
     return recursive_binary_search2(array, value, midpoint + 1, len(array) - 1)
 
+def nonrecursive_binary_search(array: list, value: any) -> int:
+    """Binary Search Algorithm - Non-recursive approach"""
+    start = 0
+    end = len(array) - 1
 
-# def nonrecursive_binary_search(array: list, value: any) -> int:
-#     """Binary Search Algorithm - Non-recursive approach"""
-#     length = len(array)
-#     while :
-#         midpoint = math.floor(len(length)/2)
-#         midpoint_element = array[midpoint]
-#         if midpoint_element == value:
-#             return midpoint
-#         elif midpoint_element > value:
-#             array = array[0:midpoint]
-#         else:
-#             array = array[midpoint:]
+    while start <= end:
+        midpoint = math.floor((start + end)/2)
+        if array[midpoint] == value:
+            return midpoint
+        if array[midpoint] > value:
+            end = midpoint - 1
+        else:
+            start = midpoint + 1
 
+    return -1
 
 def run():
     """Run method for multiple test cases"""
@@ -84,17 +79,24 @@ def run():
         [1, 2, 3, 56, 89, 100, 123, 345],
         [1, 21, 33, 56, 89, 101, 123, 345]
     ]
-    print("Approach 1")
+    print("Recursive Approach 1")
     for case in cases:
         print(case)
         found_element = recursive_binary_search(case, 100)
         print("Not found!") if found_element == -1 else print("Found element")
         print()
 
-    print("Approach 2")
+    print("Recursive Approach 2")
     for case in cases:
         print(case)
         element_index = recursive_binary_search2(case, 100, 0, len(case) - 1)
+        print("Not found!") if element_index == -1 else print(f"Found element on index {element_index}")
+        print()
+
+    print("Non-recursive Approach 2")
+    for case in cases:
+        print(case)
+        element_index = nonrecursive_binary_search(case, 100)
         print("Not found!") if element_index == -1 else print(f"Found element on index {element_index}")
         print()
 

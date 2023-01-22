@@ -10,7 +10,7 @@ Input: 1775 (or: 11011101111)
 Output: 8
 """
 
-def countBits(n: int) -> int:
+def count_bits(n: int) -> int:
     bits = 0
     while n > 0:
         bits += 1
@@ -23,7 +23,7 @@ def flip2win(n: int) -> int:
     sequence becomes larger than the remaining bits to iterate
     """
     longest, current, flipped = 0, 0, False
-    for _ in range(countBits(n)):
+    for _ in range(count_bits(n)):
         # Shift right n by the number of bits we have iterated through already
         tmp_n = n >> _
         current = 0
@@ -76,7 +76,7 @@ def flip2win2(n: int) -> int:
 # print(flip2win2(109))
 
 def flip2win3(n: int) -> int:
-    bit_count = countBits(n)
+    bit_count = count_bits(n)
     original_bit_count = bit_count
     longest, current, flipped = 0, 0, False
 

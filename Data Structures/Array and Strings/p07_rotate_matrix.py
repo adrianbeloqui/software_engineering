@@ -21,6 +21,31 @@ def rotate_matrix(matrix):
                 new_matrix[idx] = [new_matrix[idx], el]
     return new_matrix
 
+def rotate_matrix2(matrix: list) -> list:
+    n = len(matrix)
+    for layer in range(n//2):
+        first = layer
+        last = n - 1 - layer
+        i = first
+        while i < last:
+            offset = i - first
+            top = matrix[layer][i]
+
+            # left -> top
+            matrix[layer][i] = matrix[last - offset][first]
+
+            # bottom -> left
+            matrix[last - offset][first] = matrix[last][last - offset]
+
+            # right -> bottom
+            matrix[last][last - offset] = matrix[i][last]
+
+            # top -> right
+            matrix[i][last] = top
+
+            i += 1
+    return matrix
+
 
 def test():
     test_cases = [
@@ -28,7 +53,7 @@ def test():
         TestCase([[1,3], [2,4]], [[2, 1], [4,3] ])
     ]
     for test in test_cases:
-        result = rotate_matrix(test.args)
+        result = rotate_matrix2(test.args)
         assert result == test.expected
 
 test()

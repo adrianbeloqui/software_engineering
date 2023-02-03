@@ -15,7 +15,7 @@ def merge(left_array: list, right_array: list) -> list:
     right_index = 0
 
     while left_index < len(left_array) and right_index < len(right_array):
-        if left_array[left_index] < right_array[right_index]:
+        if left_array[left_index] <= right_array[right_index]:
             result.append(left_array[left_index])
             left_index += 1
         else:

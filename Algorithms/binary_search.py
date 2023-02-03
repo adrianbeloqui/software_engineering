@@ -25,7 +25,7 @@ def recursive_binary_search(array: list, value: any) -> int:
 
     midpoint = math.floor(len(array)/2)
 
-    if midpoint == 0:
+    if midpoint == 0 and array[midpoint] != value:
         return -1
 
     midpoint_element = array[midpoint]
@@ -53,7 +53,7 @@ def recursive_binary_search2(array: list, value: any, start: int, end: int) -> i
     if array[midpoint] > value:
         return recursive_binary_search2(array, value, start, midpoint - 1)
 
-    return recursive_binary_search2(array, value, midpoint + 1, len(array) - 1)
+    return recursive_binary_search2(array, value, midpoint + 1, end)
 
 def nonrecursive_binary_search(array: list, value: any) -> int:
     """Binary Search Algorithm - Non-recursive approach"""

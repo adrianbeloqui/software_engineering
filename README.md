@@ -1,3 +1,3 @@
 # Software Engineering
 
-Notes that go along with this repository are in Evernote.
+Notes and flashcards that go along with this repository are in Remnote.

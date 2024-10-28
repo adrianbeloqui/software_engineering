@@ -1,5 +1,6 @@
 from node import Node
 
+# Look at the implementation of Stack and Queue using linked lists
 
 class LinkedList:
     def __init__(self) -> None:

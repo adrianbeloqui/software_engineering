@@ -49,4 +49,4 @@ class CircularQueue:
         
     def rotate(self):
         if self._size > 0:
-            self._tail = self._tail_next
+            self._tail = self._tail._next

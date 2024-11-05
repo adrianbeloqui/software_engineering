@@ -1,4 +1,4 @@
-from node import Node
+from data_structures.linked_lists.node import Node
 
 # Look at the implementation of Stack and Queue using linked lists
 
@@ -7,6 +7,9 @@ class LinkedList:
         self._size = 0
         self._head = None
         self._tail = None
+
+    def __len__(self):
+        return self._size
 
     def append(self, element) -> None:
         newest = Node(element, None)

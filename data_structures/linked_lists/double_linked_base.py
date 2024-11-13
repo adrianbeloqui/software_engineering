@@ -20,6 +20,12 @@ class _DoubleLinkedBase:
     def is_empty(self):
         return len(self) == 0
     
+    def __iter__(self):
+        walk = self._header._next
+        while walk is not None and walk._next is not None:
+            yield walk._element
+            walk = walk._next
+    
     def _insert_between(self, e, predecessor: _Node, successor: _Node):
         newest = self._Node(e, predecessor, successor)
         predecessor._next = newest
@@ -36,3 +42,6 @@ class _DoubleLinkedBase:
         element = node._element
         node._prev = node._next = node._element = None
         return element
+    
+    def add_last(self, e):
+        return self._insert_between(e, self._trailer._prev, self._trailer)

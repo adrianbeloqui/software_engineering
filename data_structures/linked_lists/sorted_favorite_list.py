@@ -31,6 +31,15 @@ class FavoriteList:
     def __len__(self):
         return len(self._data)
     
+    def __str__(self) -> str:
+        return ",".join(str(i) for i in self)
+    
+    def __iter__(self):
+        walk = self._data._header._next
+        while walk is not None and walk._next is not None:
+            yield walk._element
+            walk = walk._next
+    
     def is_empty(self):
         return len(self) == 0
     

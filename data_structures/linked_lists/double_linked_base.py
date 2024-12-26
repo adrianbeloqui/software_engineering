@@ -17,6 +17,9 @@ class _DoubleLinkedBase:
     def __len__(self):
         return self._size
     
+    def __str__(self) -> str:
+        return ",".join(str(i) for i in self)
+    
     def is_empty(self):
         return len(self) == 0
     

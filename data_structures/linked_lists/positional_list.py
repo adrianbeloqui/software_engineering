@@ -32,17 +32,17 @@ class PositionalList(_DoubleLinkedBase):
         else:
             return self.Position(self, node)
         
-    def first(self):
+    def first(self) -> Position:
         return self._make_position(self._header._next)
     
-    def last(self):
+    def last(self) -> Position:
         return self._make_position(self._trailer._prev)
     
-    def before(self, p):
+    def before(self, p) -> Position:
         node = self._validate(p)
         return self._make_position(node._prev)
     
-    def after(self, p):
+    def after(self, p) -> Position:
         node = self._validate(p)
         return self._make_position(node._next)
     
@@ -52,7 +52,7 @@ class PositionalList(_DoubleLinkedBase):
             yield cursor.element()
             cursor = self.after(cursor)
             
-    def _insert_between(self, e, predecessor: _DoubleLinkedBase._Node, successor: _DoubleLinkedBase._Node):
+    def _insert_between(self, e, predecessor: _DoubleLinkedBase._Node, successor: _DoubleLinkedBase._Node) -> Position:
         node = super()._insert_between(e, predecessor, successor)
         return self._make_position(node)
     

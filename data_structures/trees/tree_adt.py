@@ -33,6 +33,22 @@ class Tree:
         """Return the total number of elements in the tree"""
         raise NotImplementedError('must be implemented by subclass')
     
+    def _height2(self, p):
+        """Return the height of the subtree rooted at Position p"""
+        if self.is_leaf(p):
+            return 0
+        else:
+            return 1 + max(self._height2(c) for c in self.children(p))
+    
+    def height(self, p=None):
+        """Return the height of the subtree rooted at Position p.
+        
+        If p is None, return the height of the entire tree
+        """
+        if p is None:
+            p = self.root()
+        return self._height2(p)
+    
     def is_root(self, p):
         """Return True if Position p represents the root of the tree"""
         return self.root() == p
@@ -44,3 +60,5 @@ class Tree:
     def is_empty(self):
         """Return True if the tree is empty"""
         return len(self) == 0
+    
+

@@ -5,7 +5,7 @@ class BinaryEulerTour(EulerTour):
     """Abstract base class for performing Euler tour of a binary tree.
     
     This version includes an additional _hook_invisit that is called after the tour of the left subree
-    (if any), yet before the tour fo the right subtree (if any).
+    (if any), yet before the tour of the right subtree (if any).
     
     Note: Right child is always assigned index 1 in path, even if no left sibling
     """

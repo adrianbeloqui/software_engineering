@@ -4,9 +4,15 @@ from data_structures.queue.priority_queue_base import PriorityQueueBase
 class HeapPriorityQueue(PriorityQueueBase):
     """A min-oriented priority queue implemented with a binary heap"""
 
-    def __init__(self):
-        """Create a new empty Priority Queue"""
-        self._data = []
+    def __init__(self, contents=()):
+        """Create a new empty Priority Queue
+        
+        By default, queue will be empty. If contents is given, it should be as an
+        iterable sequence of (k,v) tuples specifying the initial contents
+        """
+        self._data = [self._Item(k,v) for k,v in contents]
+        if len(self._data) > 1:
+            self._heapify()
 
     def __len__(self):
         return len(self._data)
@@ -47,6 +53,11 @@ class HeapPriorityQueue(PriorityQueueBase):
             if self._data[small_child] < self._data[j]:
                 self._swap(j, small_child)
                 self._downheap(small_child)
+
+    def _heapify(self):
+        start = self._parent(len(self) -1)  # start at PARENT of last leaf
+        for j in range(start, -1, -1):      # going to and including the root
+            self._downheap(j)
     
     def add(self, key, value):
         """Add a key-value pair to the priority queue"""

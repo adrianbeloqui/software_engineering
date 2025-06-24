@@ -1,6 +1,6 @@
 """
 Separate chaining
-resolving collisions with linear probing
+resolving collisions with quadratic probing
 """
 
 N = 11

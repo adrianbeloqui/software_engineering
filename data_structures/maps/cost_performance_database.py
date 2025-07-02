@@ -2,7 +2,7 @@ from data_structures.maps.sorted_table_map import SortedTableMap
 
 
 class CostPerformanceDatabase:
-    """Maintian a database of maximal (cost, performance) pairs"""
+    """maintain a database of maximal (cost, performance) pairs"""
 
     def __init__(self):
         """Create an empty database"""

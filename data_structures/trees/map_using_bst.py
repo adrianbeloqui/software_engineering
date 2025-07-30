@@ -14,6 +14,12 @@ class TreeMap(LinkedBinaryTree, MapBase):
             """Return value of map's key-value pair"""
             return self.element()._value
     
+    def _rebalance_insert(self, p): pass
+
+    def _rebalance_delete(self, p): pass
+
+    def _rebalance_access(self, p): pass
+
     def _subtree_search(self, p, k):
         """Return Position of p's subtree kaving key k, or last node searched"""
         if k == p.key():
@@ -178,3 +184,42 @@ class TreeMap(LinkedBinaryTree, MapBase):
             self._rebalance_access(p)       # hook for balanced tree subclasses
         raise KeyError('Key Error: ' + repr(k))
     
+    def _relink(self, parent, child, make_left_child):
+        """Relink parent node with child node (we allow child to be None)"""
+        if make_left_child:
+            parent._left = child
+        else:
+            parent._right = child
+        if child is not None:
+            child._parent = parent
+    
+    def _rotate(self, p):
+        """Rotate Position p above its parent"""
+        x = p._Node
+        y = x._parent
+        z = y._parent
+
+        if z is None:
+            self._root = x
+            x._parent = None
+        else:
+            self._relink(z, x, y == z._left)
+        
+        if x == y._left:
+            self._relink(y, x._right, True)
+            self._relink(x, y, False)
+        else:
+            self._relink(y, x._left, False)
+            self._relink(x, y, True)
+
+    def _restructure(self, x):
+        """Perform trinode restructure of Position x with parent/grandparent"""
+        y = self.parent(x)
+        z = self.parent(y)
+        if (x == self.right(y)) == (y == self.right(z)):
+            self._rotate(y)
+            return y
+        else:
+            self._rotate(x)
+            self._rotate(x)
+            return x
